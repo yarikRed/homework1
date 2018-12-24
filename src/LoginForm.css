@@ -1,0 +1,8 @@
+.center {
+    width: 200px;
+    padding: 10px;
+    margin: auto;
+    background: #fc0;
+    z-index: 999999;
+    position: fixed;
+}

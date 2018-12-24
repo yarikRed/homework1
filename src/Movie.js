@@ -1,59 +1,46 @@
 import React, {Component} from "react"
 import './Movie.css'
+import MovieDetails from "./MovieDetails"
+import Image from "./Image"
+import Title from "./Title"
+import Body from "./Body"
 
 class Movie extends Component {
 
     state = {
         isOpen: false
-    }
-
-    render() {
-        const {movie} = this.props
-
-        const image = (<div className='movie-poster'>
-                            <img src={movie.img} alt={movie.title}/>
-                       </div>)
-
-        const title = (<h4>{movie.title} ({movie.date})</h4>)
-
-        const body = (<div className='text-section'>{movie.text}</div>)
-
-        const movieDetails = (<div className='cert-runtime-genre'>
-                                <span className='certificate'> {movie.certificate}</span>
-                                <span className='runtime'> {movie.duration} min</span>
-                                <span>{movie.genres}</span>
-                                <div className='rating'>
-                                    <span className='metascore'> {movie.metascore}</span>
-                                    <span> Metascore</span>
-                                </div>
-                              </div>)
-
-        const button = (<div>
-                            <button onClick={this.handleClick} className='button-trailer'>
-                                {this.state.isOpen ? "Close trailer" : "Watch trailer"}
-                            </button>
-                        </div>)
-
-        const watchTrailer = (this.state.isOpen && <div className='trailer-frame'><iframe title={movie.uniqueTitle} width="660" height="415" src={movie.trailer}></iframe></div>)
-
-        return (
-            <div className='movie-section'>
-                {image}
-                {title}
-                {movieDetails}
-                {body}
-                {button}
-                {watchTrailer}
-            </div>
-        )
-    }
+    };
 
     handleClick = () => {
         this.setState({
             isOpen: !this.state.isOpen
         })
-    }
+    };
 
+
+    render() {
+
+        const {movie} = this.props
+
+        const button = (<div>
+            <button onClick={this.handleClick} className='button-trailer'>
+                {this.state.isOpen ? "Close trailer" : "Watch trailer"}
+            </button>
+        </div>)
+
+        const watchTrailer = (this.state.isOpen && <div className='trailer-frame'><iframe title={movie.uniqueTitle} width="660" height="415" src={movie.trailer}></iframe></div>)
+
+        return (
+            <div className='movie-section'>
+                <Image img={movie.img} title={movie.title} />
+                <Title title={movie.title} date={movie.date} />
+                <MovieDetails certificate={movie.certificate} duration={movie.duration} genres={movie.genres} metascore={movie.metascore}/>
+                <Body text={movie.text}/>
+                {button}
+                {watchTrailer}
+            </div>
+        )
+    }
 
 }
 

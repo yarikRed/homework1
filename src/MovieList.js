@@ -3,10 +3,14 @@ import Movie from './Movie'
 
 
 export default function MovieList ({movies}){
+
+    const movieElements = movies.map(movie =>
+        <li key = {movie.id + movie.uniqueTitle}><Movie movie = {movie}/></li>
+    );
+
     return (
         <ul className='movie-list'>
-            <li><Movie movie = {movies[0]}/></li>
-            <li><Movie movie = {movies[1]}/></li>
+            {movieElements}
         </ul>
     )
 
